@@ -11,55 +11,67 @@ public class LinkedLists {
 
 	public void add(Object val) {
 
-		counter++;
-		Lists current = this.new Lists();
+		Lists data = this.new Lists();
 
-		if (counter == 1)
-			first = current;
+		if (counter == 0) {
 
-		current.val = val;
-
-		if (last != null) {
-			last.next = current;
-			current.prev = last;
+			first = data;
+			last = data;
+			current = data;
+			data.val = val;
 		}
 
-		last = current;
-		
+		if (counter > 0) {
+
+			indx = counter - 1;
+			current = last;
+			current.next = data;
+			data.prev = current;
+			current = data;
+			last = data;
+			data.val = val;
+		}
+
+		indx++;
+		counter++;
+
 	}// add
 
 	public void add(Integer indx, Object val) {
 
 		Lists data = this.new Lists();
-		if ((indx >= 0) && (indx < counter)) {// if0
+
+		if (counter == indx) {
+			add(val);
+			return;
+		}
+
+		if (indx < counter)
 
 			travelList(indx);
 
-			if ((indx == 0) && (counter > 0)) {
+		if (indx == 0) {
 
-				data.next = current;
-				current.prev = data;
-			}
+			first = data;
 
-			if (indx > 0) {
-
-				data.next = current;
-				data.prev = current.prev;
-				current.prev.next = data;
-				current.prev = data;
-
-			}
-			data.val = val;
-
-			
+			data.next = current;
+			current.prev = data;
 			current = data;
+			data.val = val;
 			counter++;
-		}// if0
 
-		if (indx == counter) {// if1
-	add(val);
+		}
 
-	}// if1
+		if (indx > 0) {
+
+			current.prev.next = data;
+			data.prev = current.prev;
+			data.next = current;
+			current.prev = data;
+			current = data;
+			data.val = val;
+			counter++;
+		}
 
 	}// add
 
@@ -70,7 +82,7 @@ public class LinkedLists {
 	public Object get(Integer indx) {
 
 		travelList(indx);
-//System.out.println("ddddd"+this.indx+indx);
+
 		return current.val;
 	}
 
@@ -78,67 +90,42 @@ public class LinkedLists {
 
 		if ((indx < counter) && (indx >= 0)) {
 
-			if ((this.indx == -1) && ((counter / 2) >= indx))
-				while (this.indx != indx)
-					next();
-
-			if ((this.indx == -1) && ((counter / 2) < indx))
+			if (this.indx > indx)
 				while (this.indx != indx)
 					prev();
 
-			if (this.indx > indx) {// 0
-
-				if ((this.indx / 2) <= indx)
-					while (this.indx != indx)
-						prev();
-
-				if ((this.indx / 2) > indx)
-					this.indx = -1;
+			if (this.indx < indx)
 				while (this.indx != indx)
 					next();
 
-			}// if0
-			if (this.indx < indx) {// 1
-
-				int size = counter - this.indx;
-				int halfSize = (size / 2) + this.indx;// 8
-
-				if (halfSize <= indx) {
-					this.indx = -1;
-					while (this.indx != indx)
-						prev();
-				}
-
-				if (halfSize > indx)
-					while (this.indx != indx)
-						next();
-
-			}// if1
 		}// if
+		else {
+			System.out.print("за массивом");
+		}
 
 	}
 
 	private void prev() {
 
-		if (indx == (-1)) {
+		if (counter == 1) {
 			current = last;
-			indx = (counter - 1);
+			indx--;
 			return;
 		}
-		if (indx > 0)
+		if (counter > 1)
 			current = current.prev;
 		indx--;
 	}
 
 	private void next() {
 
-		indx++;
-		if (indx == 0) {
+		if (counter == 0) {
 			current = first;
 		}
-		if ((indx > 0) && (indx < counter))
+		if (counter > 0)
 			current = current.next;
 
+		indx++;
 	}
 
 	private class Lists {
@@ -153,18 +140,25 @@ public class LinkedLists {
 	public static void main(String[] args) {
 
 		LinkedLists test = new LinkedLists();
-		for (int i = 0; i < 12; i++)
-			test.add(i);
-		
-		test.add(1,"first");
-		test.add(7,"seven");
-		//test.add(0,"null");
-		
+		// for (int i = 0; i < 3; i++)
+		test.add(0);
+		test.add(1);
+		test.add(1, 999);
+		test.add(777);
+		test.add(4, 9991);
+
+		// System.out.println(test.indx);
+
+		test.add(0, 444);
+		test.add(3, 445);
+		test.add(6, 446);
+
+		test.add("fir");
+		test.add(7, "seven");
+		test.add(0, "null");
+
 		for (int i = 0; i < test.size(); i++)
-		System.out.println(test.get(i));
-		
-		//System.out.println(test.get(0));
-		
+			System.out.println(test.get(i));
 
 		System.out.println("size " + test.size());
 
