@@ -42,6 +42,7 @@ public class LinkedLists {
 		Lists data = this.new Lists();
 
 		if (counter == indx) {
+			
 			add(val);
 			return;
 		}
@@ -90,40 +91,63 @@ public class LinkedLists {
 
 		if ((indx < counter) && (indx >= 0)) {
 
-			if (this.indx > indx)
-				while (this.indx != indx)
-					prev();
+			if (this.indx > indx) {
 
-			if (this.indx < indx)
-				while (this.indx != indx)
-					next();
+				int half = this.indx / 2;
 
-		}// if
-		else {
+				if (half < indx) {
+
+					while (this.indx != indx)
+						prev();
+				}
+				if (half >= indx) {
+
+					this.indx = 0;
+					current = first;
+
+					while (this.indx != indx)
+						next();
+				}
+
+			}
+
+			if (this.indx < indx) {
+
+				int size = (counter - this.indx);
+				int halfSize = (size / 2) + this.indx;
+
+				if (halfSize > indx) {
+
+					while (this.indx != indx)
+						next();
+				}
+
+				if (halfSize <= indx) {
+
+					this.indx = counter - 1;
+					current = last;
+
+					while (this.indx != indx)
+						prev();
+				}
+			}
+
+		} else {
+		
 			System.out.print("за массивом");
 		}
-
 	}
 
 	private void prev() {
 
-		if (counter == 1) {
-			current = last;
-			indx--;
-			return;
-		}
-		if (counter > 1)
-			current = current.prev;
+		current = current.prev;
+		
 		indx--;
 	}
 
 	private void next() {
 
-		if (counter == 0) {
-			current = first;
-		}
-		if (counter > 0)
-			current = current.next;
+		current = current.next;
 
 		indx++;
 	}
@@ -140,26 +164,27 @@ public class LinkedLists {
 	public static void main(String[] args) {
 
 		LinkedLists test = new LinkedLists();
-		// for (int i = 0; i < 3; i++)
-		test.add(0);
-		test.add(1);
+		for (int i = 0; i < 3; i++)
+			test.add(i);
+
 		test.add(1, 999);
 		test.add(777);
 		test.add(4, 9991);
 
-		// System.out.println(test.indx);
-
+		
 		test.add(0, 444);
 		test.add(3, 445);
 		test.add(6, 446);
 
 		test.add("fir");
 		test.add(7, "seven");
-		test.add(0, "null");
-
+		test.add(0, "nulliion");
+		test.add("fir1");
+		test.add(8, "nulliion8");
+		
 		for (int i = 0; i < test.size(); i++)
 			System.out.println(test.get(i));
-
+		 //System.out.println(test.get(5));
 		System.out.println("size " + test.size());
 
 	}// main
