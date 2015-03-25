@@ -163,29 +163,17 @@ public class LinkedLists {
 
 	public static void main(String[] args) {
 
+		long readT = -System.currentTimeMillis();
 		LinkedLists test = new LinkedLists();
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 100; i++)
 			test.add(i);
 
-		test.add(1, 999);
-		test.add(777);
-		test.add(4, 9991);
-
 		
-		test.add(0, 444);
-		test.add(3, 445);
-		test.add(6, 446);
-
-		test.add("fir");
-		test.add(7, "seven");
-		test.add(0, "nulliion");
-		test.add("fir1");
-		test.add(8, "nulliion8");
-		
-		for (int i = 0; i < test.size(); i++)
-			System.out.println(test.get(i));
+		for (int i = 0; i < 100; i++)
+			test.get(i);
+		readT += System.currentTimeMillis();
 		 //System.out.println(test.get(5));
-		System.out.println("size " + test.size());
+		System.out.println(readT);
 
 	}// main
 
