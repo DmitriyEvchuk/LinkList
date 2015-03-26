@@ -9,31 +9,58 @@ public class MyList {
 	public void add(Object val) {
 
 		Data add = new Data();
-		Data current = null;
 
 		if (first == null) {
 			first = add;
-			first.val = val;
-			return;
+
 		}
 
-		if (first != null) {
-			current = last();
+		else {
 
+			Data current = null;
+			current = last();
 			add.prev = current;
 			current.next = add;
-			add.val = val;
+
 		}
+
+		add.val = val;
 
 	}
 
-	private Data last() {
+	public void add(int indx, Object val) {
 
-		Data current = first;
-		while (current.next != null)
-			current = current.next;
+		Data add = new Data();
 
-		return current;
+		if (indx == 0) {
+
+			add.next = first;
+			first = add;
+
+		} else {
+
+			int size = size();
+
+			if (indx < size) {
+
+				Data current = getForIndx(indx);
+
+				add.next = current;
+				add.prev = current.prev;
+				current.prev.next = add;
+
+			} else if (indx == size) {
+				add(val);
+
+			} else
+				System.out.println("за пределами");
+
+		}
+
+		if (add.val == null)
+
+			add.val = val;
+
 	}
 
 	public Object getLast() {
@@ -55,6 +82,11 @@ public class MyList {
 
 	public Object get(int indx) {
 
+		return getForIndx(indx).val;
+	}
+
+	private Data getForIndx(int indx) {
+
 		Data current = first;
 
 		int indxcount = 0;
@@ -63,7 +95,16 @@ public class MyList {
 			indxcount++;
 		}
 
-		return current.val;
+		return current;
+	}
+
+	private Data last() {
+
+		Data current = first;
+		while (current.next != null)
+			current = current.next;
+
+		return current;
 	}
 
 	private class Data {
@@ -77,21 +118,23 @@ public class MyList {
 
 	public static void main(String[] args) {
 
-		long testL = -System.currentTimeMillis();
-
-		// LinkedList test=new LinkedList();
-		MyList test = new MyList();
 		
-		for (int i = 0; i < 10001; i++)
+		MyList test = new MyList();
+
+		for (int i = 0; i < 10; i++)
 			test.add(i);
 
+		test.add(5, "d1");
+		test.add(0, "d2");
+		test.add(11, "d3");
+		test.add(14, "d4");
+
 		for (int i = 0; i < test.size(); i++)
-			// System.out.println(
-			test.get(i);// );
+			System.out.println(test.get(i));// );
 
 		
-		testL += System.currentTimeMillis();
-		System.out.println(testL);
+		//System.out.println(test.getForIndx(11).prev.val);
+		 
 
 		// System.out.println(test.last().prev.val);
 
