@@ -48,8 +48,9 @@ public class MyList {
 				add.next = current;
 				add.prev = current.prev;
 				current.prev.next = add;
-
-			} else if (indx == size) {
+				current.prev=add;
+			} else
+				if (indx == size) {
 				add(val);
 
 			} else
@@ -124,16 +125,23 @@ public class MyList {
 		for (int i = 0; i < 10; i++)
 			test.add(i);
 
+		test.add(11, "d1098");
 		test.add(5, "d1");
-		test.add(0, "d2");
-		test.add(11, "d3");
-		test.add(14, "d4");
-
+		test.add(0, "d0");
+		test.add(5, "d2");
+		test.add(9, "d3");
+		test.add(10, "d4");
+		test.add(13, "d15");
+		test.add(15, "d15");
+		test.add(17, "d17");
+		
 		for (int i = 0; i < test.size(); i++)
 			System.out.println(test.get(i));// );
 
 		
-		//System.out.println(test.getForIndx(11).prev.val);
+		System.out.println("size  "+test.size());
+		
+		//System.out.println(test.getForIndx(10).prev.val);
 		 
 
 		// System.out.println(test.last().prev.val);
