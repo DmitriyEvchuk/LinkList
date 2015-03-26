@@ -49,11 +49,16 @@ public class MyList {
 				add.prev = current.prev;
 				current.prev.next = add;
 				current.prev=add;
-			} else
+			} 
+		
+			else
+			
 				if (indx == size) {
 				add(val);
 
 			} else
+			
+				
 				System.out.println("за пределами");
 
 		}
@@ -73,7 +78,9 @@ public class MyList {
 
 		Data current = first;
 		int size = 0;
+		
 		while (current != null) {
+			
 			current = current.next;
 			size++;
 		}
@@ -91,7 +98,9 @@ public class MyList {
 		Data current = first;
 
 		int indxcount = 0;
+		
 		while (indxcount != indx) {
+		
 			current = current.next;
 			indxcount++;
 		}
@@ -102,7 +111,9 @@ public class MyList {
 	private Data last() {
 
 		Data current = first;
+		
 		while (current.next != null)
+		
 			current = current.next;
 
 		return current;
@@ -129,11 +140,8 @@ public class MyList {
 		test.add(5, "d1");
 		test.add(0, "d0");
 		test.add(5, "d2");
-		test.add(9, "d3");
-		test.add(10, "d4");
-		test.add(13, "d15");
-		test.add(15, "d15");
-		test.add(17, "d17");
+		test.add(13, "d3");
+		
 		
 		for (int i = 0; i < test.size(); i++)
 			System.out.println(test.get(i));// );
