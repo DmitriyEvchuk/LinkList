@@ -48,24 +48,26 @@ public class MyList {
 				add.next = current;
 				add.prev = current.prev;
 				current.prev.next = add;
-				current.prev=add;
-			} 
-		
-			else
-			
+				current.prev = add;
+			}
+
+			else {
+
 				if (indx == size) {
-				add(val);
 
-			} else
-			
+					add.prev = last();
+					add.prev.next = add;
 				
-				System.out.println("за пределами");
+				} else
 
+				{
+					System.out.println("за пределами");
+				}
+
+			}
 		}
 
-		if (add.val == null)
-
-			add.val = val;
+		add.val = val;
 
 	}
 
@@ -78,9 +80,9 @@ public class MyList {
 
 		Data current = first;
 		int size = 0;
-		
+
 		while (current != null) {
-			
+
 			current = current.next;
 			size++;
 		}
@@ -98,9 +100,9 @@ public class MyList {
 		Data current = first;
 
 		int indxcount = 0;
-		
+
 		while (indxcount != indx) {
-		
+
 			current = current.next;
 			indxcount++;
 		}
@@ -111,9 +113,9 @@ public class MyList {
 	private Data last() {
 
 		Data current = first;
-		
+
 		while (current.next != null)
-		
+
 			current = current.next;
 
 		return current;
@@ -130,7 +132,6 @@ public class MyList {
 
 	public static void main(String[] args) {
 
-		
 		MyList test = new MyList();
 
 		for (int i = 0; i < 10; i++)
@@ -141,16 +142,14 @@ public class MyList {
 		test.add(0, "d0");
 		test.add(5, "d2");
 		test.add(13, "d3");
-		
-		
+		test.add(13, "d4");
+
 		for (int i = 0; i < test.size(); i++)
 			System.out.println(test.get(i));// );
 
-		
-		System.out.println("size  "+test.size());
-		
-		//System.out.println(test.getForIndx(10).prev.val);
-		 
+		System.out.println("size  " + test.size());
+
+		// System.out.println(test.getForIndx(10).prev.val);
 
 		// System.out.println(test.last().prev.val);
 
